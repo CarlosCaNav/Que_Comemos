@@ -1,0 +1,12 @@
+<app-aniadir *ngIf="this.datosService.emergenteMostrado == 'platos'"/>
+<p>Esto es sólo un ejemplo</p>
+<ul>
+    <li>cochinillo</li>
+    <li>Paella</li>
+    <li>Telepizza</li>
+</ul>
+<div style="display: flex;justify-content: space-between;">
+    <button (click)="this.datosService.Emergente('platos')">Añadir plato</button>
+    <button>eliminar platos</button>
+<button routerLink="/inicio">Volver</button>
+</div>

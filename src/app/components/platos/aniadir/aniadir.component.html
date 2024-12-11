@@ -1,0 +1,32 @@
+<div class="emergente">
+    <h3>Añadir nuevo plato.</h3>
+    <form>
+        <label for="nombre">Nombre: </label>
+        <input type="text" id="nombre" name="nombre" placeholder="Pato a la pekinesa"><br><br>
+        <label for="ingredientes"><b>Tipo:</b></label> <br>
+        <tr>
+            <td><label for="ingredientes">arroz:</label></td>
+            <td><input type="radio" name="tipo" value="arroz"><br></td>
+        </tr>
+        <tr>
+            <td><label for="ingredientes">pasta:</label></td>
+            <td><input type="radio" name="tipo" value="arroz"><br></td>
+        </tr>
+        <tr>
+            <td><label for="ingredientes">carnes:</label></td>
+            <td><input type="radio" name="tipo" value="arroz"><br></td>
+        </tr>
+        <tr>
+            <td><label for="ingredientes">pescados:</label></td>
+            <td><input type="radio" name="tipo" value="arroz"><br></td>
+        </tr>
+        <br>
+        <button style="width: max-content;">Nuevo tipo</button>
+    </form>
+    <br>
+    <br>
+    <div style="display: flex;justify-content: space-between;">
+    <button>Agregar</button>
+    <button routerLink="/inicio" (click)="this.datosService.Emergente('nada')">Cancelar</button>
+    </div>
+</div>
