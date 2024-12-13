@@ -5,29 +5,23 @@
         <th>Producto &nbsp; &nbsp; &nbsp;</th>
         <th>Descartes</th>
     </tr>
-    <tr>
-        <td>Arroz </td>        
-        <td><input type="checkbox" id="arroz" name=arroz></td>
+    <tr *ngFor="let tipo of this.datosService.tipos">
+
+        <td>{{tipo}} </td>    
+        <td><input type="checkbox" id="arroz" name=arroz></td> <!-- 
+        <td><input type="checkbox" id="arroz" name=arroz [(ngModel)]="this.datosService.Emergente"></td> -->
     </tr>
-    <tr>
-        <td>Pasta </td>        
-        <td><input type="checkbox" id="pasta" name=pasta></td>
-    </tr>
-    <tr>
-        <td>Carnes </td>        
-        <td><input type="checkbox" id="carne" name=carne></td>
-    </tr>
-    <tr>
-        <td>Pescados</td>        
-        <td><input type="checkbox" id="pescado" name=pescado></td>
-    </tr>
+
 </table>
-<!-- 
-<ul><li *ngFor="let comida of comidas"></li></ul> -->
+
+<ul>
+    <li *ngFor="let plato of this.datosService.platos">{{plato.nombre}}</li>
+</ul>
 
 <br>
-<br>
+<br>{{this.datosService.resultado}}<br><br>
 <div style="display: flex;justify-content: space-between;">
-<button>Ver sugerencia</button>
-<button routerLink="/inicio">Volver</button>
+    
+    <button (click)="this.datosService.ResultadoAleatorio()">Ver sugerencia</button>
+    <button routerLink="/inicio">Volver</button>
 </div>

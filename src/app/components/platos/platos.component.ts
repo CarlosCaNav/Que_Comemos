@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AniadirComponent } from "./aniadir/aniadir.component";
 import { NgFor, NgIf } from '@angular/common';
-import { DatosService } from '../../datos.service';
-import { Comidas } from '../../interfaces/comidas';
+import { DatosService } from '../../datos.service';/* 
+import { Comidas } from '../../interfaces/comidas'; */
 
 @Component({
   selector: 'app-platos',
@@ -12,7 +12,9 @@ import { Comidas } from '../../interfaces/comidas';
   templateUrl: './platos.component.html',
   styleUrl: './platos.component.css'
 })
-export class PlatosComponent {
+export class PlatosComponent {constructor(public datosService: DatosService) {}
+
+  /* 
   comidas: Comidas[] = [];
   
   constructor(public datosService: DatosService) {
@@ -21,6 +23,6 @@ export class PlatosComponent {
     console.log(this.comidas[1]);
     console.log(this.comidas[2]);
     
-  }
+  } */
 
 }
