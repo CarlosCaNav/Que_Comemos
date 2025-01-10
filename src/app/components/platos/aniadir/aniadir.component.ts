@@ -1,14 +1,65 @@
 import { Component } from '@angular/core';
 import { DatosService } from '../../../datos.service';
+import {
+  ReactiveFormsModule,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Comidas } from '../../../interfaces/comidas';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-aniadir',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule, NgFor],
   templateUrl: './aniadir.component.html',
-  styleUrl: './aniadir.component.css'
+  styleUrl: './aniadir.component.css',
 })
 export class AniadirComponent {
-  constructor (public datosService:DatosService){}
+  constructor(public datosService: DatosService) {}
 
- }
+  aniadir: FormGroup = new FormGroup({
+    nombre: new FormControl(undefined, Validators.required), 
+    eleccion: new FormControl(""), 
+    arroz: new FormControl(false),
+    pasta: new FormControl(false),
+    verduras: new FormControl(false),
+    carnes: new FormControl(false),
+    carnes_picadas: new FormControl(false),
+    pescados: new FormControl(false),
+  });
+/* 
+  ngOnInit(): void {
+    this.aniadir.valueChanges.subscribe(ev => {
+      console.log('test-evento', ev);
+    })
+  } */
+  agregar() {
+    var nuevaComida: Comidas = { id: 1, nombre: 'Hamburguesas', tipo: 'carne' };
+
+
+    if (this.aniadir.valid) {
+/* 
+for( i = 0; i < this.aniadir.length ){} */
+
+      nuevaComida = {
+        id: this.datosService.comidas.length + 1,
+        nombre: this.aniadir.value.nombre,
+        tipo: 'yaVeremos',
+      };
+
+      this.datosService.comidas.push(nuevaComida);
+
+      this.datosService.emergenteMostrado = 'nada';
+    }
+    else {alert("Tú! subnormal, que no le has puesto nombre!")}
+
+    console.log('lo que me pone es: ' + this.aniadir);
+    console.log('nombre es: ' + this.aniadir.value.nombre);
+    console.log('arroz es: ' + this.aniadir.value.arroz);
+    console.log('pasta es: ' + this.aniadir.value.pasta);
+
+    console.log('hay ' + this.datosService.comidas.length + 'comidas');
+  }
+}

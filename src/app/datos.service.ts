@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Comidas } from './interfaces/comidas';
+import { FormGroup } from '@angular/forms';
+import { signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -13,23 +15,31 @@ export class DatosService {
 
   emergenteMostrado: string = "nada";
 
-  private comidas: Comidas[] = [
-    { id: 1, nombre: 'Hamburguesas', tipo: 'carne' },
+  formTipos = signal<FormGroup>(
+    new FormGroup({
+
+    })
+  )
+
+  public comidas: Comidas[] = [
+    { id: 1, nombre: 'Hamburguesas', tipo: 'carnes' },
     { id: 2, nombre: 'Arroz con pollo', tipo: 'arroz' },
     { id: 3, nombre: 'Ensalada', tipo: 'verduras' },
     { id: 4, nombre: 'Arroz blanco', tipo: 'arroz' },
-    { id: 5, nombre: 'Chuletas de Aguja', tipo: 'carne' },
-    { id: 6, nombre: 'Albóndigas', tipo: 'carne picada' },
+    { id: 5, nombre: 'Chuletas de Aguja', tipo: 'carnes' },
+    { id: 6, nombre: 'Albóndigas', tipo: 'carnes' },
     { id: 7, nombre: 'Arroz tres delicias', tipo: 'arroz' },
     { id: 8, nombre: 'Macarrones', tipo: 'pasta' },
     { id: 9, nombre: 'Sopa', tipo: 'pasta' },
-    { id: 10, nombre: 'solomillo', tipo: 'carne' },
+    { id: 10, nombre: 'solomillo', tipo: 'carnes' },
   ];
 
 
   constructor(private http: HttpClient) {
     this.platos = this.getAllComidas();
     this.TiposdeComida()
+    console.log("son " + this.tipos);
+    
   }
 
 
@@ -42,14 +52,17 @@ export class DatosService {
 
       if (this.tipos.includes(this.comidas[i].tipo) == false) {
         this.tipos.push(this.comidas[i].tipo)
+        /* 
+        this.tipos.push(this.comidas[i].tipo) */
       }
-
     }
-
   }
 
   Emergente(emergente: string) {
     this.emergenteMostrado = emergente
+
+    console.log(this.tipos);
+    
   }
 
   ResultadoAleatorio() {

@@ -1,32 +1,50 @@
 <div class="emergente">
-    <h3>Añadir nuevo plato.</h3>
-    <form>
-        <label for="nombre">Nombre: </label>
-        <input type="text" id="nombre" name="nombre" placeholder="Pato a la pekinesa"><br><br>
-        <label for="ingredientes"><b>Tipo:</b></label> <br>
+  <h3>Añadir nuevo plato.</h3>
+  <form [formGroup]="aniadir">
+    <label for="nombre">Nombre: </label>
+    <input
+      formControlName="nombre"
+      type="text"
+      id="nombre"
+      name="nombre"
+      placeholder="Pato a la pekinesa"
+    /><br /><br />
+    <label for="ingredientes"><b>Tipo:</b></label> <br />
+
+      <tr *ngFor="let tipo of this.datosService.tipos">
+        <td>
+          <label for="ingredientes">{{ tipo.toUpperCase().charAt(0) }}{{ tipo.slice(1) }}:</label>
+        </td><!-- 
+        <td><input formControlName={{tipo}} [value]="true"  type="radio" /></td><br> -->
+        <td><input formControlName="eleccion" value={{tipo}} type="radio" /></td>
+      </tr>
+
+    <!-- 
         <tr>
             <td><label for="ingredientes">arroz:</label></td>
-            <td><input type="radio" name="tipo" value="arroz"><br></td>
+            <td><input formControlName="arroz" type="checkbox" name="tipo" value="arroz"><br></td>
         </tr>
         <tr>
             <td><label for="ingredientes">pasta:</label></td>
-            <td><input type="radio" name="tipo" value="arroz"><br></td>
+            <td><input formControlName="pasta" type="checkbox" name="tipo" value="arroz"><br></td>
         </tr>
         <tr>
             <td><label for="ingredientes">carnes:</label></td>
-            <td><input type="radio" name="tipo" value="arroz"><br></td>
+            <td><input formControlName="carnes" type="checkbox" name="tipo" value="arroz"><br></td>
         </tr>
         <tr>
             <td><label for="ingredientes">pescados:</label></td>
-            <td><input type="radio" name="tipo" value="arroz"><br></td>
-        </tr>
-        <br>
-        <button style="width: max-content;">Nuevo tipo</button>
-    </form>
-    <br>
-    <br>
-    <div style="display: flex;justify-content: space-between;">
-    <button>Agregar</button>
-    <button routerLink="/inicio" (click)="this.datosService.Emergente('nada')">Cancelar</button>
-    </div>
+            <td><input formControlName="pescados" type="checkbox" name="tipo" value="arroz"><br></td>
+        </tr> -->
+    <br />
+  </form>
+  <button style="width: max-content">Nuevo tipo</button>
+  <br />
+  <br />
+  <div style="display: flex; justify-content: space-between">
+    <button (click)="agregar()">Agregar</button>
+    <button routerLink="/inicio" (click)="this.datosService.Emergente('nada')">
+      Cancelar
+    </button>
+  </div>
 </div>
