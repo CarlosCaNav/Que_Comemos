@@ -46,7 +46,7 @@ for( i = 0; i < this.aniadir.length ){} */
       nuevaComida = {
         id: this.datosService.comidas.length + 1,
         nombre: this.aniadir.value.nombre,
-        tipo: 'yaVeremos',
+        tipo: this.aniadir.value.eleccion,
       };
 
       this.datosService.comidas.push(nuevaComida);

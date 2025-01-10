@@ -67,7 +67,9 @@ export class DatosService {
 
   ResultadoAleatorio() {
     var numeroAleatorio = Math.floor(Math.random() * this.comidas.length)
-    console.log(numeroAleatorio);
+    
+    console.log("el número aleatorio es: " + numeroAleatorio);
+
     if (this.resultado.length >= 7){
       this.resultado = [];
     }

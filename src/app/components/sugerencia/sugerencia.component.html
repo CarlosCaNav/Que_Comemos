@@ -1,27 +1,34 @@
 <h2>¿Qué tipo de comida deseas evitar?</h2>
-<p>Marca los tipos de comida que quieras evitar </p>
-<table>
+<p>Marca los tipos de comida que quieras evitar.</p>
+
+
+<form [formGroup]="elegir">
+  <table>
     <tr>
-        <th>Producto &nbsp; &nbsp; &nbsp;</th>
-        <th>Descartes</th>
+      <th>Producto &nbsp; &nbsp; &nbsp;</th>
+      <th>Descartes</th>
     </tr>
+
     <tr *ngFor="let tipo of this.datosService.tipos">
-
-        <td>{{tipo}} </td>    
-        <td><input type="checkbox" id="arroz" name=arroz></td> <!-- 
-        <td><input type="checkbox" id="arroz" name=arroz [(ngModel)]="this.datosService.Emergente"></td> -->
+      <td>
+        <label for="ingredientes"
+          >{{ tipo.toUpperCase().charAt(0) }}{{ tipo.slice(1) }}:</label
+        >
+      </td>
+      <td>
+        <input formControlName="{{tipo}}" value={{true}} type="checkbox" />
+      </td>
     </tr>
-
-</table>
+  </table>
+</form>
 
 <ul>
-    <li *ngFor="let plato of this.datosService.platos">{{plato.nombre}}</li>
+  <li *ngFor="let plato of this.datosService.platos">{{ plato.nombre }}</li>
 </ul>
 
-<br>
-<br>{{this.datosService.resultado}}<br><br>
-<div style="display: flex;justify-content: space-between;">
-    
-    <button (click)="this.datosService.ResultadoAleatorio()">Ver sugerencia</button>
-    <button routerLink="/inicio">Volver</button>
+<br />
+<br />{{ this.datosService.resultado }}<br /><br />
+<div style="display: flex; justify-content: space-between">
+  <button (click)="this.ResultadoAleatorio()">Ver sugerencia</button>
+  <button routerLink="/inicio">Volver</button>
 </div>
