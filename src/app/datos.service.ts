@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Signal } from '@angular/core';
 import { Comidas } from './interfaces/comidas';
 import { FormGroup } from '@angular/forms';
 import { signal } from '@angular/core';
@@ -11,7 +11,9 @@ export class DatosService {
 
   platos: Comidas[] = [];
   tipos: string[] = [];
-  resultado: string[] = [];
+  /* resultado = signal<string[]>([]); */
+  resultado: string = "";
+  resultados: string[] = [];
 
   emergenteMostrado: string = "nada";
 
@@ -22,16 +24,16 @@ export class DatosService {
   )
 
   public comidas: Comidas[] = [
-    { id: 1, nombre: 'Hamburguesas', tipo: 'carnes' },
-    { id: 2, nombre: 'Arroz con pollo', tipo: 'arroz' },
-    { id: 3, nombre: 'Ensalada', tipo: 'verduras' },
-    { id: 4, nombre: 'Arroz blanco', tipo: 'arroz' },
-    { id: 5, nombre: 'Chuletas de Aguja', tipo: 'carnes' },
-    { id: 6, nombre: 'Albóndigas', tipo: 'carnes' },
-    { id: 7, nombre: 'Arroz tres delicias', tipo: 'arroz' },
-    { id: 8, nombre: 'Macarrones', tipo: 'pasta' },
-    { id: 9, nombre: 'Sopa', tipo: 'pasta' },
-    { id: 10, nombre: 'solomillo', tipo: 'carnes' },
+    { id: 1, nombre: 'Hamburguesas', tipo: 'carnes', ignorar: false },
+    { id: 2, nombre: 'Arroz con pollo', tipo: 'arroz' , ignorar: false },
+    { id: 3, nombre: 'Ensalada', tipo: 'verduras' , ignorar: false },
+    { id: 4, nombre: 'Arroz blanco', tipo: 'arroz' , ignorar: false },
+    { id: 5, nombre: 'Chuletas de Aguja', tipo: 'carnes' , ignorar: false },
+    { id: 6, nombre: 'Albóndigas', tipo: 'carnes' , ignorar: false },
+    { id: 7, nombre: 'Arroz tres delicias', tipo: 'arroz' , ignorar: false },
+    { id: 8, nombre: 'Macarrones', tipo: 'pasta' , ignorar: false },
+    { id: 9, nombre: 'Sopa', tipo: 'pasta' , ignorar: false },
+    { id: 10, nombre: 'solomillo', tipo: 'carnes' , ignorar: false },
   ];
 
 
@@ -65,18 +67,4 @@ export class DatosService {
     
   }
 
-  ResultadoAleatorio() {
-    var numeroAleatorio = Math.floor(Math.random() * this.comidas.length)
-    
-    console.log("el número aleatorio es: " + numeroAleatorio);
-
-    if (this.resultado.length >= 7){
-      this.resultado = [];
-    }
-    if (this.comidas[numeroAleatorio].tipo == "nada") {
-      this.ResultadoAleatorio()
-    } else {
-      this.resultado =[...this.resultado, " " + this.comidas[numeroAleatorio].nombre]     
-    }
-  }
 }

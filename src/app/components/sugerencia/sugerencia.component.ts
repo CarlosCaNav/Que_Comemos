@@ -25,33 +25,50 @@ export class SugerenciaComponent {
     }
   }
 
+  platosNoDescartados: number[] = [];
   elegir: FormGroup = new FormGroup({});
 
+  /* 
+  ngOnInit(): void {
+    this.elegir.valueChanges.subscribe((ev) => {
+      console.log('test-evento', ev);
+    });
+  } */
+
+  PlatosPosibles() {
+    this.platosNoDescartados = [];
+
+    for (var i = 0; i < this.datosService.comidas.length; i++) {
+      for (var j = 0; j < this.datosService.tipos.length; j++) {
+        var eleccion = this.datosService.tipos[j];
+
+        if (this.elegir.value[eleccion] == false) {
+          if (this.datosService.comidas[i].tipo == eleccion) {
+            this.platosNoDescartados.push(i);
+          }
+        }
+      } 
+    }
+  }
+
   ResultadoAleatorio() {
+    this.PlatosPosibles();
+
+    console.log('qué es esto ' + this.platosNoDescartados + ' nada?');
+
+    var numeroAleatorioFinal = 0;
     var numeroAleatorio = Math.floor(
-      Math.random() * this.datosService.comidas.length
+      Math.random() * this.platosNoDescartados.length
     );
-    const resultado: string = this.datosService.comidas[numeroAleatorio].nombre;
 
-    console.log("valor " + this.elegir.value[resultado]);
-    console.log("holi " + resultado);
-    
+    numeroAleatorioFinal = this.platosNoDescartados[numeroAleatorio];
 
-    if (this.elegir.value.resultado == true) {
-      console.log(this.elegir.value.resultado);
-      
-      console.log("la lio?");
-      
-      this.ResultadoAleatorio();
+    if(this.datosService.resultados.length > 5){
+      this.datosService.resultados.shift();
     }
-    else { this.datosService.resultado.push(resultado); /* 
-      console.log("Ignora los valores?");
-      console.log(this.elegir.value.resultado);
-      console.log(this.elegir.value.arroz);
-      console.log(numeroAleatorio);
-      console.log(resultado); */
-      
-      
-    }
+
+    this.datosService.resultados.push(this.datosService.comidas[numeroAleatorioFinal].nombre);
+    this.datosService.resultado = this.datosService.comidas[numeroAleatorioFinal].nombre;
+
   }
 }

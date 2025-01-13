@@ -1,7 +1,6 @@
 <h2>¿Qué tipo de comida deseas evitar?</h2>
 <p>Marca los tipos de comida que quieras evitar.</p>
 
-
 <form [formGroup]="elegir">
   <table>
     <tr>
@@ -16,7 +15,11 @@
         >
       </td>
       <td>
-        <input formControlName="{{tipo}}" value={{true}} type="checkbox" />
+        <input
+          formControlName="{{ tipo }}"
+          value="{{ true }}"
+          type="checkbox"
+        />
       </td>
     </tr>
   </table>
@@ -27,7 +30,9 @@
 </ul>
 
 <br />
-<br />{{ this.datosService.resultado }}<br /><br />
+<br />
+<b>{{ this.datosService.resultado }}</b
+><br />{{ this.datosService.resultados }}<br /><br />
 <div style="display: flex; justify-content: space-between">
   <button (click)="this.ResultadoAleatorio()">Ver sugerencia</button>
   <button routerLink="/inicio">Volver</button>

@@ -36,7 +36,7 @@ export class AniadirComponent {
     })
   } */
   agregar() {
-    var nuevaComida: Comidas = { id: 1, nombre: 'Hamburguesas', tipo: 'carne' };
+    var nuevaComida: Comidas = { id: 1, nombre: 'Hamburguesas', tipo: 'carne', ignorar: false };
 
 
     if (this.aniadir.valid) {
@@ -47,6 +47,7 @@ for( i = 0; i < this.aniadir.length ){} */
         id: this.datosService.comidas.length + 1,
         nombre: this.aniadir.value.nombre,
         tipo: this.aniadir.value.eleccion,
+        ignorar: false,
       };
 
       this.datosService.comidas.push(nuevaComida);
