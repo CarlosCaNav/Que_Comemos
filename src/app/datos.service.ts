@@ -13,7 +13,6 @@ export class DatosService {
   });
 
   tipoDeSesion: string = 'nada';
-  platos: Comidas[] = [];
   tipos: string[] = [];
   resultado: string = '';
   resultados: string[] = [];
@@ -37,7 +36,7 @@ export class DatosService {
   ];
 
   constructor(private http: HttpClient) {
-    this.platos = this.getAllComidas();
+    this.comidas = this.getAllComidas();
     this.tiposdeComida();
     console.log('son ' + this.tipos);
   }

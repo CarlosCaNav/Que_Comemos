@@ -1,8 +1,8 @@
 <app-aniadir *ngIf="this.datosService.emergenteMostrado == 'platos'"/>
-<p>Esto es sólo un ejemplo {{this.datosService.platos[1].nombre}}</p>
+<h2>Lista de todos los platos disponibles</h2>
 
 <ul>
-    <li *ngFor="let plato of this.datosService.platos">{{plato.nombre}}</li>
+    <li *ngFor="let plato of this.datosService.comidas">{{plato.nombre}}</li>
 </ul>
 
 <div style="display: flex;justify-content: space-between;">

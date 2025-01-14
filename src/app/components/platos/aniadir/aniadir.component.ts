@@ -53,14 +53,13 @@ for( i = 0; i < this.aniadir.length ){} */
       this.datosService.comidas.push(nuevaComida);
 
       this.datosService.emergenteMostrado = 'nada';
+      console.log("Qué hay dentro" + this.datosService.comidas[this.datosService.comidas.length -1].nombre);
+      
     }
     else {alert("Tú! subnormal, que no le has puesto nombre!")}
 
-    console.log('lo que me pone es: ' + this.aniadir);
-    console.log('nombre es: ' + this.aniadir.value.nombre);
-    console.log('arroz es: ' + this.aniadir.value.arroz);
-    console.log('pasta es: ' + this.aniadir.value.pasta);
+    console.log('lo que me pone es: ' + this.aniadir.value.eleccion);
 
-    console.log('hay ' + this.datosService.comidas.length + 'comidas');
+    console.log('hay ' + this.datosService.comidas.length + ' comidas');
   }
 }

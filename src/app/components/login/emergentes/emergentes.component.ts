@@ -38,12 +38,16 @@ const nombre: string = this.datosService.usuarioActual.value.name;
   }
   cargarDatos(usuario: string) {
     const datos = localStorage.getItem(usuario);
+
+    for(var i = 0; i < this.datosService.comidas.length; i++) {
+      this.datosService.comidas[i].ignorar = true;
+    }
     if (datos) {
       // Convertir la cadena JSON a un objeto después de cargar
       const datosParseados = JSON.parse(datos);
       this.datosService.usuarioActual.value.name = datosParseados.name;
-      this.datosService.platos = datosParseados.meals;
-      this.datosService.platos = [...this.datosService.platos];
+      this.datosService.comidas = datosParseados.meals;
+    /*   this.datosService.platos = [...this.datosService.platos]; */
       this.datosService.tipoDeSesion = 'local';
       this.datosService.emergenteMostrado = 'nada';
       this.datosService.subEmergenteMostrado = 'nada';
