@@ -1,0 +1,31 @@
+<div>
+  <app-emergentes
+    *ngIf="this.datosService.emergenteMostrado == 'guardadoLocal'"
+  />
+</div>
+
+<h2 *ngIf="this.datosService.usuarioActual.value.name == ''">¿Quién eres?</h2>
+<h2 *ngIf="this.datosService.usuarioActual.value.name != ''">
+  ¡Hola {{ this.datosService.usuarioActual.value.name }}!
+</h2>
+
+<div *ngIf="this.datosService.usuarioActual.value.name == '' || this.datosService.tipoDeSesion == 'local'">
+  <button (click)="this.datosService.emergente('guardadoLocal')">
+    Guardar o cargar datos en local</button
+  ><br />
+  <button>Crear cuenta en la nube</button><br />
+  <button>Loguearse "¡Ya tengo cuenta!"</button><br /><br /><br />
+</div>
+
+<div *ngIf="this.datosService.usuarioActual.value.name != ''">
+  <button>Cambiar de usuario</button><br />
+  <button>Guardar datos</button><br />
+  <button>Cargar datos antiguos</button><br />
+  <button>Cerrar sesión</button><br /><br /><br />
+</div>
+
+<button class="button" (click)="borrar('Pepito')">Poner usuario Pepito</button
+><br />
+<button class="button" (click)="borrar('')">Quitar usuario</button><br /><br />
+
+<button class="button" routerLink="/inicio">Volver</button>

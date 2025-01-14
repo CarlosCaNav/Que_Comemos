@@ -18,11 +18,7 @@ import {
 })
 export class SugerenciaComponent {
   constructor(public datosService: DatosService) {
-    for (var i = 0; i < this.datosService.tipos.length; i++) {
-      var eleccion = this.datosService.tipos[i];
-
-      this.elegir.addControl(eleccion, new FormControl(false));
-    }
+    this.platosSeleccionados() 
   }
 
   platosNoDescartados: number[] = [];
@@ -35,6 +31,14 @@ export class SugerenciaComponent {
     });
   } */
 
+    platosSeleccionados() {
+      for (var i = 0; i < this.datosService.tipos.length; i++) {
+        var eleccion = this.datosService.tipos[i];
+  
+        this.elegir.addControl(eleccion, new FormControl(true));
+      }
+    }
+
   PlatosPosibles() {
     this.platosNoDescartados = [];
 
@@ -42,33 +46,39 @@ export class SugerenciaComponent {
       for (var j = 0; j < this.datosService.tipos.length; j++) {
         var eleccion = this.datosService.tipos[j];
 
-        if (this.elegir.value[eleccion] == false) {
+        if (this.elegir.value[eleccion] == true) {
           if (this.datosService.comidas[i].tipo == eleccion) {
             this.platosNoDescartados.push(i);
           }
         }
-      } 
+      }
     }
   }
 
   ResultadoAleatorio() {
+    this.platosSeleccionados();
     this.PlatosPosibles();
+    if (this.platosNoDescartados.length == 0) {
+      alert('No hay platos que cumplan con los requisitos seleccionados');
+    } else {
+      var numeroAleatorioFinal = 0;
+      var numeroAleatorio = Math.floor(
+        Math.random() * this.platosNoDescartados.length
+      );
 
-    console.log('qué es esto ' + this.platosNoDescartados + ' nada?');
+      numeroAleatorioFinal = this.platosNoDescartados[numeroAleatorio];
 
-    var numeroAleatorioFinal = 0;
-    var numeroAleatorio = Math.floor(
-      Math.random() * this.platosNoDescartados.length
-    );
+      if (this.datosService.resultados.length > 5) {
+        this.datosService.resultados.shift();
+      }
 
-    numeroAleatorioFinal = this.platosNoDescartados[numeroAleatorio];
+      this.datosService.resultados.push(
+        this.datosService.comidas[numeroAleatorioFinal].nombre
+      );
+      this.datosService.resultado =
+        this.datosService.comidas[numeroAleatorioFinal].nombre;
 
-    if(this.datosService.resultados.length > 5){
-      this.datosService.resultados.shift();
+        this.datosService.resultados=[...this.datosService.resultados];
     }
-
-    this.datosService.resultados.push(this.datosService.comidas[numeroAleatorioFinal].nombre);
-    this.datosService.resultado = this.datosService.comidas[numeroAleatorioFinal].nombre;
-
   }
 }

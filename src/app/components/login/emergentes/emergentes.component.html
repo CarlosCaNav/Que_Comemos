@@ -1,0 +1,54 @@
+<div *ngIf="this.datosService.subEmergenteMostrado != 'cargar'" class="emergente">
+  <h3>Guardado local</h3>
+  <form *ngIf="this.datosService.tipoDeSesion == 'nada'" [formGroup]="datosService.usuarioActual">
+    <input
+      formControlName="name"
+      type="text"
+      id="nombre"
+      name="nombre"
+      placeholder="Carlos"
+    />
+  </form>
+  <br /><br />
+  <br />
+  <br />
+  <div style="display: flex; justify-content: space-between">
+    <button
+      *ngIf="this.datosService.tipoDeSesion != 'local'"
+      (click)="guardarDatos()"
+    >
+      Crear usuario y guardar en local
+    </button>
+    <button
+      *ngIf="this.datosService.tipoDeSesion === 'local'"
+      (click)="guardarDatos()"
+    >
+      Actualizar información
+    </button>
+    <button (click)="this.datosService.subEmergente('cargar')">
+      Cargar usuario
+    </button>
+    <button
+      (click)="this.datosService.emergente('')"
+    >
+      Cancelar
+    </button>
+  </div>
+</div>
+
+<div
+  *ngIf="this.datosService.subEmergenteMostrado === 'cargar'"
+  class="emergente"
+>
+  <li *ngFor="let usuario of this.clavesLocalStorage">
+    <button (click)="cargarDatos(usuario)">Cargar {{ usuario }}</button>
+  </li>
+  <li *ngIf="this.clavesLocalStorage.length == 0">No hay usuarios guardados</li>
+  <br /><br /><br />
+  <button
+    (click)="this.datosService.emergente('')"
+    (click)="this.datosService.subEmergente('')"
+  >
+    Cancelar
+  </button>
+</div>

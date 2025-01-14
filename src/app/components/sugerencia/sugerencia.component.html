@@ -1,11 +1,11 @@
 <h2>¿Qué tipo de comida deseas evitar?</h2>
-<p>Marca los tipos de comida que quieras evitar.</p>
+<p>Desmarca los tipos de comida que quieras evitar.</p>
 
 <form [formGroup]="elegir">
   <table>
     <tr>
       <th>Producto &nbsp; &nbsp; &nbsp;</th>
-      <th>Descartes</th>
+      <th>Elección</th>
     </tr>
 
     <tr *ngFor="let tipo of this.datosService.tipos">
