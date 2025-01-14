@@ -1,6 +1,13 @@
-<div *ngIf="this.datosService.subEmergenteMostrado != 'cargar'" class="emergente">
+<div
+  *ngIf="this.datosService.subEmergenteMostrado != 'cargar'"
+  class="emergente"
+>
   <h3>Guardado local</h3>
-  <form *ngIf="this.datosService.tipoDeSesion == 'nada'" [formGroup]="datosService.usuarioActual">
+  <h4 *ngIf="this.datosService.tipoDeSesion == 'local'"> ¿Qué quieres hacer ahora {{this.datosService.usuarioActual.value.name}}?</h4>
+  <form
+    *ngIf="this.datosService.tipoDeSesion == 'nada'"
+    [formGroup]="datosService.usuarioActual"
+  >
     <input
       formControlName="name"
       type="text"
@@ -25,14 +32,20 @@
     >
       Actualizar información
     </button>
-    <button (click)="this.datosService.subEmergente('cargar')">
-      Cargar usuario
-    </button>
     <button
-      (click)="this.datosService.emergente('')"
+      *ngIf="this.datosService.tipoDeSesion === 'local'"
+      (click)="cerrarSesion()"
     >
-      Cancelar
+      Cerrar sesión
     </button>
+    <button (click)="this.datosService.subEmergente('cargar')">
+      Cargar o eliminar usuarios
+    </button>
+  </div>
+  <div>
+    <br/>
+    <br/>
+    <button (click)="this.datosService.emergente('')">Cancelar</button>
   </div>
 </div>
 
@@ -42,6 +55,7 @@
 >
   <li *ngFor="let usuario of this.clavesLocalStorage">
     <button (click)="cargarDatos(usuario)">Cargar {{ usuario }}</button>
+    <button style="background-color: red; margin-left: 10px; width: 100px;" (click)="borrarDatos(usuario)">Borrar usuario</button>
   </li>
   <li *ngIf="this.clavesLocalStorage.length == 0">No hay usuarios guardados</li>
   <br /><br /><br />
