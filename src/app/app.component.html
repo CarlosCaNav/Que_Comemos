@@ -1,6 +1,7 @@
 <div class="todo">
   <div class="bloques">
-    <h1>¿¡Qué comemos hoy {{this.datosService.usuarioActual.value.name}}!?</h1>
+    <h1>¿¡Qué comemos hoy<span *ngIf="this.datosService.usuarioActual.value.name != '' "> {{this.datosService.usuarioActual.value.name}}</span>!?</h1>
+    <h2 style="color: red;" *ngIf="this.datosService.datosGuardaros == false">¡Atención! Datos sin guardar</h2>
   </div>
   <div class="bloques contenido">
     <router-outlet />

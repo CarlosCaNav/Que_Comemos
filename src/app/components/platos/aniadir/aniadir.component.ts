@@ -7,21 +7,25 @@ import {
   Validators,
 } from '@angular/forms';
 import { Comidas } from '../../../interfaces/comidas';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-aniadir',
   standalone: true,
-  imports: [ReactiveFormsModule, NgFor],
+  imports: [ReactiveFormsModule, NgFor, NgIf],
   templateUrl: './aniadir.component.html',
   styleUrl: './aniadir.component.css',
 })
 export class AniadirComponent {
   constructor(public datosService: DatosService) {}
 
+  tipos: FormGroup = new FormGroup({
+    tipo: new FormControl(undefined, Validators.required),
+  });
+
   aniadir: FormGroup = new FormGroup({
-    nombre: new FormControl(undefined, Validators.required), 
-    eleccion: new FormControl(""), 
+    nombre: new FormControl(undefined, Validators.required),
+    eleccion: new FormControl(''),
     arroz: new FormControl(false),
     pasta: new FormControl(false),
     verduras: new FormControl(false),
@@ -29,37 +33,56 @@ export class AniadirComponent {
     carnes_picadas: new FormControl(false),
     pescados: new FormControl(false),
   });
-/* 
-  ngOnInit(): void {
-    this.aniadir.valueChanges.subscribe(ev => {
-      console.log('test-evento', ev);
-    })
-  } */
   agregar() {
-    var nuevaComida: Comidas = { id: 1, nombre: 'Hamburguesas', tipo: 'carne', ignorar: false };
+    var nuevaComida: Comidas = {
+      id: 1,
+      nombre: 'Hamburguesas',
+      tipo: 'carne',
+      ignorar: false,
+    };
 
+    if (this.tipos.valid) {
+      this.datosService.tipos.push(this.tipos.value.tipo);
+      console.log('tipos: ' + this.datosService.tipos);
 
-    if (this.aniadir.valid) {
-/* 
-for( i = 0; i < this.aniadir.length ){} */
+/* aquí estoy repitiendo el mismo código de abajo con un pequeño cambio. Tengo que solucionarlo */
+      if (this.tipos.valid) {
+        nuevaComida = {
+          id: this.datosService.comidas.length + 1,
+          nombre: this.aniadir.value.nombre,
+          tipo: this.tipos.value.tipo, // aquí es donde hago hacer el cambio
+          ignorar: false,
+        };
 
-      nuevaComida = {
-        id: this.datosService.comidas.length + 1,
-        nombre: this.aniadir.value.nombre,
-        tipo: this.aniadir.value.eleccion,
-        ignorar: false,
-      };
+        this.datosService.comidas.push(nuevaComida);
 
-      this.datosService.comidas.push(nuevaComida);
+        this.datosService.emergenteMostrado = 'nada';
+        this.datosService.datosGuardaros = false;
+      } else {
+        alert('Por favor, ingresa nombre de usuario');
+      }
 
-      this.datosService.emergenteMostrado = 'nada';
-      console.log("Qué hay dentro" + this.datosService.comidas[this.datosService.comidas.length -1].nombre);
-      
+    } else {
+      if (this.aniadir.valid) {
+        nuevaComida = {
+          id: this.datosService.comidas.length + 1,
+          nombre: this.aniadir.value.nombre,
+          tipo: this.aniadir.value.eleccion,
+          ignorar: false,
+        };
+
+        this.datosService.comidas.push(nuevaComida);
+
+        this.datosService.emergenteMostrado = 'nada';
+        this.datosService.datosGuardaros = false;
+        console.log(
+          'Qué hay dentro ' +
+            this.datosService.comidas[this.datosService.comidas.length - 1]
+              .nombre
+        );
+      } else {
+        alert('Por favor, ingresa nombre de usuario');
+      }
     }
-    else {alert("Tú! subnormal, que no le has puesto nombre!")}
-
-    console.log('lo que me pone es: ' + this.aniadir.value.eleccion);
-
-    console.log('hay ' + this.datosService.comidas.length + ' comidas');
   }
 }

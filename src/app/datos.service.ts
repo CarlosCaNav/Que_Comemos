@@ -16,6 +16,7 @@ export class DatosService {
   tipos: string[] = [];
   resultado: string = '';
   resultados: string[] = [];
+  datosGuardaros: boolean = true;
 
   emergenteMostrado: string = 'nada';
   subEmergenteMostrado: string = 'nada';

@@ -36,6 +36,7 @@ this.datosService.usuarioActual = this.datosService.usuarioActual.value.name; */
       this.datosService.tipoDeSesion = 'local';
       this.datosService.emergenteMostrado = 'nada';
       this.datosService.subEmergenteMostrado = 'nada';
+      this.datosService.datosGuardaros = true;
     } else {
       alert('Por favor, ingresa nombre de usuario');
     }
@@ -67,7 +68,7 @@ this.datosService.usuarioActual = this.datosService.usuarioActual.value.name; */
     if (confirmacion) {
       localStorage.removeItem(usuario);
       alert('Datos eliminados correctamente');
-      this.datosService.tipoDeSesion = 'nada';
+      this.datosService.subEmergenteMostrado = 'nada';
     }
   }
 
@@ -82,7 +83,7 @@ this.datosService.usuarioActual = this.datosService.usuarioActual.value.name; */
     for (let i = 0; i < localStorage.length; i++) {
       const clave = localStorage.key(i);
       if (clave !== null) {
-        // Verifica si la clave no es nula (puede ocurrir en algunos casos raros)
+        // Verifica si la clave no es nula
         this.clavesLocalStorage.push(clave);
       }
     }
