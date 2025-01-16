@@ -8,9 +8,30 @@ import { NgIf } from '@angular/common';
   standalone: true,
   imports: [RouterOutlet, NgIf],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
-  constructor(public datosService: DatosService) {}
+  constructor(public datosService: DatosService) {
+    // Carga el último usuario que guardó datos
+    const ultimoUsuario = localStorage.getItem('predeterminado');
+
+console.log('ultimoUsuario: ' + ultimoUsuario);
+
+
+    if (ultimoUsuario) {
+      const datos = localStorage.getItem(ultimoUsuario);
+
+      if (datos) {
+        // Convertir la cadena JSON a un objeto después de cargar
+        const datosParseados = JSON.parse(datos);
+        this.datosService.usuarioActual.value.name = datosParseados.name;
+        this.datosService.comidas = datosParseados.meals;
+        this.datosService.tipoDeSesion = 'local';
+        this.datosService.emergenteMostrado = 'nada';
+        this.datosService.subEmergenteMostrado = 'nada';
+      }
+      else { alert ('error desconocido, contacta con el administrador'); }
+    }
+  }
   title = 'Que_comemos';
 }

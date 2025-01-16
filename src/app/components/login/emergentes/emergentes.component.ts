@@ -37,9 +37,14 @@ this.datosService.usuarioActual = this.datosService.usuarioActual.value.name; */
       this.datosService.emergenteMostrado = 'nada';
       this.datosService.subEmergenteMostrado = 'nada';
       this.datosService.datosGuardaros = true;
+
+      localStorage.setItem(
+        'predeterminado', this.datosService.usuarioActual.value.name
+      );
     } else {
       alert('Por favor, ingresa nombre de usuario');
     }
+
   }
   cargarDatos(usuario: string) {
     const datos = localStorage.getItem(usuario);
