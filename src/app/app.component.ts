@@ -15,8 +15,6 @@ export class AppComponent {
     // Carga el último usuario que guardó datos
     const ultimoUsuario = localStorage.getItem('predeterminado');
 
-console.log('ultimoUsuario: ' + ultimoUsuario);
-
 
     if (ultimoUsuario) {
       const datos = localStorage.getItem(ultimoUsuario);

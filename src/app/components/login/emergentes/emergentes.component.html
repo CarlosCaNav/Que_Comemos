@@ -1,9 +1,12 @@
 <div
   *ngIf="this.datosService.subEmergenteMostrado != 'cargar'"
   class="emergente"
+  style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"
 >
   <h3>Guardado local</h3>
-  <h4 *ngIf="this.datosService.tipoDeSesion == 'local'"> ¿Qué quieres hacer ahora {{this.datosService.usuarioActual.value.name}}?</h4>
+  <h4 *ngIf="this.datosService.tipoDeSesion == 'local'">
+    ¿Qué quieres hacer ahora {{ this.datosService.usuarioActual.value.name }}?
+  </h4>
   <form
     *ngIf="this.datosService.tipoDeSesion == 'nada'"
     [formGroup]="datosService.usuarioActual"
@@ -16,7 +19,6 @@
       placeholder="Carlos"
     />
   </form>
-  <br /><br />
   <br />
   <br />
   <div style="display: flex; justify-content: space-between">
@@ -43,8 +45,8 @@
     </button>
   </div>
   <div>
-    <br/>
-    <br/>
+    <br />
+    <br />
     <button (click)="this.datosService.emergente('')">Cancelar</button>
   </div>
 </div>
@@ -53,10 +55,21 @@
   *ngIf="this.datosService.subEmergenteMostrado === 'cargar'"
   class="emergente"
 >
-  <li *ngFor="let usuario of this.clavesLocalStorage">
-    <button (click)="cargarDatos(usuario)">Cargar {{ usuario }}</button>
-    <button style="background-color: red; margin-left: 10px; width: 100px;" (click)="borrarDatos(usuario)">Borrar usuario</button>
-  </li>
+  <tr *ngFor="let usuario of this.clavesLocalStorage">
+    <td>
+      <button style="width: auto" (click)="cargarDatos(usuario)">
+        Cargar {{ usuario }}
+      </button>
+    </td>
+    <td>
+      <button
+        style="background-color: red; margin-left: 10px; width: 100px"
+        (click)="borrarDatos(usuario)"
+      >
+        Borrar usuario
+      </button>
+    </td>
+  </tr>
   <li *ngIf="this.clavesLocalStorage.length == 0">No hay usuarios guardados</li>
   <br /><br /><br />
   <button
