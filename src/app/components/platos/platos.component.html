@@ -2,11 +2,13 @@
 <h2>Lista de todos los platos disponibles</h2>
 
 <ul>
-    <li *ngFor="let plato of this.datosService.comidas">{{plato.nombre}}</li>
+    <li *ngFor="let plato of this.datosService.comidas">{{plato.nombre}} 
+        <span  *ngIf="this.datosService.emergenteMostrado == 'eliminar'" style="color: red; cursor:pointer" (click)="eliminar(plato.id)">Eliminar<br><br></span></li>
 </ul>
 
 <div style="display: flex;justify-content: space-between;">
     <button (click)="this.datosService.emergente('platos')">Añadir plato</button>
-    <button>Eliminar platos</button>
+    <button *ngIf="this.datosService.emergenteMostrado != 'eliminar'" (click)="this.datosService.emergente('eliminar')">Eliminar platos</button>
+    <button *ngIf="this.datosService.emergenteMostrado === 'eliminar'" (click)="this.datosService.emergente('nada')">Dejar de platos</button>
 <button routerLink="/inicio">Volver</button>
 </div>

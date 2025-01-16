@@ -14,6 +14,15 @@ import { Comidas } from '../../interfaces/comidas'; */
 })
 export class PlatosComponent {constructor(public datosService: DatosService) {}
 
+eliminar(id: number) {
+  this.datosService.comidas.splice(id - 1, 1);
+  this.datosService.datosGuardaros = false;
+
+  for (var i = 0; i <= this.datosService.comidas.length - 1; ++i) {
+    this.datosService.comidas[i].id = i + 1;
+  }
+}
+
   /* 
   comidas: Comidas[] = [];
   

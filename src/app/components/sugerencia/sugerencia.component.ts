@@ -68,7 +68,7 @@ export class SugerenciaComponent {
 
       numeroAleatorioFinal = this.platosNoDescartados[numeroAleatorio];
 
-      if (this.datosService.resultados.length > 5) {
+      if (this.datosService.resultados.length > 2) {
         this.datosService.resultados.shift();
       }
 
