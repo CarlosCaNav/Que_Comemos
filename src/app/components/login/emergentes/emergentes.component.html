@@ -1,9 +1,20 @@
 <div
   *ngIf="this.datosService.subEmergenteMostrado != 'cargar'"
   class="emergente"
-  style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"
+  style="
+    position: fixed;
+    height: auto;
+    width: auto;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-left: 0;
+  "
 >
-  <h3>Guardado local</h3>
+  <!-- style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"
+  -->
+  <h3>Guardado local.</h3>
+  <h4 *ngIf="this.datosService.tipoDeSesion != 'local'">¿Quién eres?</h4>
   <h4 *ngIf="this.datosService.tipoDeSesion == 'local'">
     ¿Qué quieres hacer ahora {{ this.datosService.usuarioActual.value.name }}?
   </h4>
@@ -29,25 +40,33 @@
       Crear usuario y guardar en local
     </button>
     <button
-      *ngIf="this.datosService.tipoDeSesion === 'local'"
+      *ngIf="
+        this.datosService.tipoDeSesion === 'local' &&
+        this.datosService.datosGuardaros == false
+      "
       (click)="guardarDatos()"
+      style="box-shadow: 2px 2px 15px white"
     >
       Actualizar información
     </button>
     <button
       *ngIf="this.datosService.tipoDeSesion === 'local'"
-      (click)="cerrarSesion()"
-    >
+      (click)="cerrarSesion()"  >
       Cerrar sesión
     </button>
-    <button (click)="this.datosService.subEmergente('cargar')">
+    <button
+      (click)="this.datosService.subEmergente('cargar')"
+     
+    >
       Cargar o eliminar usuarios
     </button>
   </div>
   <div>
     <br />
     <br />
-    <button (click)="this.datosService.emergente('')">Cancelar</button>
+      <div style="display: flex; justify-content: flex-end" >
+        <button (click)="this.datosService.emergente('')">Cancelar</button>
+      </div>
   </div>
 </div>
 
@@ -73,9 +92,7 @@
   <li *ngIf="this.clavesLocalStorage.length == 0">No hay usuarios guardados</li>
   <br /><br /><br />
   <button
-    (click)="this.datosService.emergente('')"
-    (click)="this.datosService.subEmergente('')"
-  >
+    (click)="this.datosService.emergente('')" > <!-- comprobar si tengo que añadir también el subemergente -->
     Cancelar
   </button>
 </div>

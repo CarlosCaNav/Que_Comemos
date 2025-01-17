@@ -81,7 +81,6 @@ this.datosService.usuarioActual = this.datosService.usuarioActual.value.name; */
   cerrarSesion() {
     this.datosService.usuarioActual.value.name = '';
     this.datosService.tipoDeSesion = 'nada';
-    this.datosService.emergenteMostrado = 'nada';
     this.datosService.subEmergenteMostrado = 'nada';  
   }
 

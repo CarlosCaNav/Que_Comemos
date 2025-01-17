@@ -45,12 +45,12 @@ export class AniadirComponent {
       this.datosService.tipos.push(this.tipos.value.tipo);
       console.log('tipos: ' + this.datosService.tipos);
 
-/* aquí estoy repitiendo el mismo código de abajo con un pequeño cambio. Tengo que solucionarlo */
+/* aquí estoy repitiendo el mismo código de abajo con un pequeño cambio. Tengo que simplificarlo */
       if (this.tipos.valid) {
         nuevaComida = {
           id: this.datosService.comidas.length + 1,
           nombre: this.aniadir.value.nombre,
-          tipo: this.tipos.value.tipo, // aquí es donde hago hacer el cambio
+          tipo: this.tipos.value.tipo, // aquí es donde hago el cambio
           ignorar: false,
         };
 

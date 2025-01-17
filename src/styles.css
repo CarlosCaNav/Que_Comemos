@@ -1,10 +1,12 @@
-body{
+body, html{
     background-color: rgb(189, 255, 183);
     margin: 0 auto;
+    height: 100%;
 }
 
 button{
     width: 200px;
+    height: 30px;
     border: 2px solid green;
     background-color: rgb(185, 255, 79);
     border-radius: 5px;
