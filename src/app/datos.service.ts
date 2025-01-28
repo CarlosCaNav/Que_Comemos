@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, Signal } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { Comidas } from './interfaces/comidas';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl} from '@angular/forms';
 import { signal } from '@angular/core';
 
 @Injectable({
